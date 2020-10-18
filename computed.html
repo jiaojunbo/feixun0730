@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全选非全选</title>
+</head>
+
+<body>
+  <div id="app">
+<input type="checkbox">全选/非全选
+<br>
+<input type="checkbox">唱歌
+  </div>
+<script>
+  let vm = new vue({
+    el:'#app',
+    data:{
+      hobbyList:[{
+        id:1,
+        name:'唱歌',
+        value:'song'
+      },{
+        id:2,
+        name:'跳舞',
+        value:'dance'
+      },{
+        id:3,
+        name:'阅读',
+        value:'read'
+      },{
+        id:4,
+        name:'睡觉',
+        value:'sleep'
+      }]
+    }
+    computed:{
+      
+    }
+  })
+</script>
+
+</body>
+
+</html>
