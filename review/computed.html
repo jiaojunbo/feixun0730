@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复习computed案例</title>
+</head>
+<div id="app">
+    <input type="checkbox" v-model="slacted">
+    <span v-for:{item in hubbyList}>
+        <input type="checkbox" :id="item.id | handleID" :value="item.value" v-model="checkList">
+        <label for="item.name" :id="item.id | handleID"></label>
+    </span>
+</div>
+
+<body>
+    <script src="../lianxi/vue.js"></script>
+    <script>
+        //创建vue实例
+        let app = new Vue({
+            el: '#app',
+            //数据编写 hobbyList
+            data: {
+                hubbyList: [{
+                    id: 1,
+                    name: '唱歌',
+                    value: 'song'
+                }, {
+                    id: 2,
+                    name: '跳舞',
+                    value: 'qq'
+                }, {
+                    id: 3,
+                    name: '阅读',
+                    value: 'ww'
+                }, {
+                    id: 4,
+                    name: '睡觉',
+                    value: 'ee'
+                }],
+                //存储选中选项
+                checkList: [],
+            },
+            //computed  
+            computed: {
+                //slacted 选中状态
+                slacted: {
+                    get() {
+                        return this.checkList.length === this.hubbyList.length;
+                    },
+                    set(value) {
+                        if (value) {
+                            this.hubbyList.forEach(item => {
+                                this.checkList.push(item.value);
+                            })
+                            return;
+                        }
+                        this.checkList = [];
+                    },
+                }
+
+            },
+            fliters: {
+                handleID(value) {
+                    return "handle" + vlue
+                }
+            }
+
+        })
+
+
+        //filters
+        //handleID 添加id
+
+    </script>
+</body>
+
+</html>
