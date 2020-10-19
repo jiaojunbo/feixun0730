@@ -7,10 +7,11 @@
     <title>复习computed案例</title>
 </head>
 <div id="app">
-    <input type="checkbox" v-model="slacted">
-    <span v-for:{item in hubbyList}>
-        <input type="checkbox" :id="item.id | handleID" :value="item.value" v-model="checkList">
-        <label for="item.name" :id="item.id | handleID"></label>
+    <input type="checkbox" v-model="slacted">全选/非全选
+    <br>
+    <span v-for="item in hubbyList">
+        <input type="checkbox" :id="item.id|handleID" :value="item.value" v-model="checkList">
+        <label for="item.id|handleID" v-text="item.name"></label>
     </span>
 </div>
 
@@ -61,18 +62,17 @@
                 }
 
             },
-            fliters: {
+            filters: {
                 handleID(value) {
-                    return "handle" + vlue
+                    return "handle" + value;
                 }
             }
 
         })
 
-
+ 
         //filters
         //handleID 添加id
-
     </script>
 </body>
 
