@@ -7,72 +7,60 @@
     <title>复习computed案例</title>
 </head>
 <div id="app">
-    <input type="checkbox" v-model="slacted">全选/非全选
+    <input type="checkbox" v-model ='slected'>全选/非全选
     <br>
-    <span v-for="item in hubbyList">
-        <input type="checkbox" :id="item.id|handleID" :value="item.value" v-model="checkList">
-        <label for="item.id|handleID" v-text="item.name"></label>
+    <span v-for='item in CHECK_BOX'>
+        <input type="checkbox" id="item.id | hanleID" :value="item.value" v-model='curBox'>
+        <label for="item.id|hanleID" v-text='item.name'></label>
     </span>
 </div>
 
 <body>
     <script src="../lianxi/vue.js"></script>
     <script>
+        let CHECK_BOX = [{
+            id: 1,
+            name: '跳舞',
+            value: 'solny'
+        }, {
+            id: 1,
+            name: '跳舞',
+            value: 'read'
+        }, {
+            id: 1,
+            name: '跳舞',
+            value: 'sleep'
+        }]
         //创建vue实例
         let app = new Vue({
-            el: '#app',
-            //数据编写 hobbyList
+            el: "#app",
             data: {
-                hubbyList: [{
-                    id: 1,
-                    name: '唱歌',
-                    value: 'song'
-                }, {
-                    id: 2,
-                    name: '跳舞',
-                    value: 'qq'
-                }, {
-                    id: 3,
-                    name: '阅读',
-                    value: 'ww'
-                }, {
-                    id: 4,
-                    name: '睡觉',
-                    value: 'ee'
-                }],
-                //存储选中选项
-                checkList: [],
+                CHECK_BOX,
+                curBox: []
             },
-            //computed  
             computed: {
-                //slacted 选中状态
-                slacted: {
+                //存储选中选项
+                slected: {
                     get() {
-                        return this.checkList.length === this.hubbyList.length;
+                        return this.curBox.length === this.CHECK_BOX.length;
                     },
                     set(value) {
                         if (value) {
-                            this.hubbyList.forEach(item => {
-                                this.checkList.push(item.value);
-                            })
-                            return;
+                            this.CHECK_BOX.forEach(item => {
+                               this.curBox.push(item.value);
+                            });
+                            return
                         }
-                        this.checkList = [];
-                    },
+                        this.curBox =[];
+                    }
                 }
-
             },
-            filters: {
-                handleID(value) {
-                    return "handle" + value;
+            filters:{
+                hanleID(value){
+                    return 'hoddy'+value;
                 }
             }
-
-        })
-
- 
-        //filters
-        //handleID 添加id
+        });
     </script>
 </body>
 
