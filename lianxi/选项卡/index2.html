@@ -1,30 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>选项卡</title>
-    <link rel="stylesheet" href="./css/reset.min.css">
-</head>
-<body>
-    
-    <div id="active">
-        <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </div>
-
-</body>
-=======
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/reset.min.css">
-  <title>选项卡</title>
+  <title>选项卡2</title>
 
   <style>
     .tabBox {
@@ -54,15 +35,10 @@
     }
 
     .tabBox .content {
-      display: none;
       box-sizing: border-box;
       padding: 10px;
       height: 300px;
       border: 1px solid #aaa;
-    }
-
-    .tabBox .content.active {
-      display: block;
     }
   </style>
 </head>
@@ -70,35 +46,33 @@
 <body>
   <div id="app">
     <div class="tabBox">
-      <ul class="tab" @click='handle($event)'>
-        <li v-for='(item,index) in TAB_DATA' v-html='item.name' :class='{active:index === curIndex}' :index='index'>
-          //@click = 'curIndex=index'
+      <ul class="tab">
+        <li v-for="(item,index) in TAB_DATA" v-html="item.name" :class="{active:index === curIndex}"
+          @click="handle($event,index,item.id)">
         </li>
-      </ul>
-      <div class="content" v-for='(item,index) in TAB_DATA' v-html='item.chidren' :class='{active:index === curIndex}'>
+      </ul> 
+      <div class="content" v-html="content">
       </div>
     </div>
   </div>
 
+  
   <!-- import js -->
   <script src="../vue.js"></script>
+  <script src="../axios.min.js"></script>
   <script>
     let TAB_DATA = [{
       id: 1,
       name: '音乐',
-      chidren: '音乐的内容'
     }, {
       id: 2,
       name: '影视',
-      chidren: '影视的内容'
     }, {
       id: 3,
       name: '动漫',
-      chidren: '动漫的内容'
     }, {
       id: 4,
       name: '纪录片',
-      chidren: '纪录片的内容'
     }]
 
     let vm = new Vue({
@@ -107,20 +81,37 @@
         //选项卡的数据
         TAB_DATA,
         //默认展示的索引
-        curIndex: 0
+        curIndex: 0,
+        //内容区域的数据
+        content: ""
+      },
+      created() {
+        //声明周期函数（vue实例创建成功）
+        this.queryDATA(TAB_DATA[this.curIndex]['id']);
       },
       methods: {
-        handle(ev) {
-          let target = ev.target;
-          tarTag = target.tagName;
-          if (tarTag === 'LI') {
-            this.curIndex = parseInt(target.getAttribute('index'))
-          }
+        queryDATA(curID) {
+          axios.get('./data.json').then(response => {
+            return response.data;
+          }).then(result => {
+            let itemDATA = result.find(item => parseInt(item.id) === parseInt(curID));
+            if (itemDATA) {
+              this.content = itemDATA.content;
+              return;
+            }
+            return Promise.reject();
+          }).catch(reason => {
+            this.content = '查无此信息'
+          })
+        },
+        handle(ev, index, id) {
+          if (this.curIndex === index) return;
+          this.curIndex = index;
+          this.queryDATA(id)
         }
       }
     })
   </script>
 </body>
 
->>>>>>> 371d129d1c6d484ae3571f111ec75a75fe684f90
 </html>

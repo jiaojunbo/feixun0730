@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>复习computed案例</title>
 </head>
+<<<<<<< HEAD
+=======
+<div id="app">
+    <input type="checkbox" v-model ='slected'>全选/非全选
+    <br>
+    <span v-for='item in CHECK_BOX'>
+        <input type="checkbox" id="item.id | hanleID" :value="item.value" v-model='curBox'>
+        <label for="item.id|hanleID" v-text='item.name'></label>
+    </span>
+</div>
+>>>>>>> 371d129d1c6d484ae3571f111ec75a75fe684f90
 
 <body>
     <div id="app">
@@ -18,11 +29,24 @@
     </div>
     <script src="../lianxi/vue.js"></script>
     <script>
+        let CHECK_BOX = [{
+            id: 1,
+            name: '跳舞',
+            value: 'solny'
+        }, {
+            id: 1,
+            name: '跳舞',
+            value: 'read'
+        }, {
+            id: 1,
+            name: '跳舞',
+            value: 'sleep'
+        }]
         //创建vue实例
         let app = new Vue({
-            el: '#app',
-            //数据编写 hobbyList
+            el: "#app",
             data: {
+<<<<<<< HEAD
                 hobbyList: [{
                     id: 1,
                     name: '唱歌',
@@ -42,9 +66,13 @@
                 }],
                 //存储选中选项
                 checkList: [],
+=======
+                CHECK_BOX,
+                curBox: []
+>>>>>>> 371d129d1c6d484ae3571f111ec75a75fe684f90
             },
-            //computed  
             computed: {
+<<<<<<< HEAD
                 //slacted 选中状态
                 slected: {
                     get() {
@@ -64,15 +92,30 @@
             filters: {
                 handleID(value) {
                     return "handle" + value;
+=======
+                //存储选中选项
+                slected: {
+                    get() {
+                        return this.curBox.length === this.CHECK_BOX.length;
+                    },
+                    set(value) {
+                        if (value) {
+                            this.CHECK_BOX.forEach(item => {
+                               this.curBox.push(item.value);
+                            });
+                            return
+                        }
+                        this.curBox =[];
+                    }
+                }
+            },
+            filters:{
+                hanleID(value){
+                    return 'hoddy'+value;
+>>>>>>> 371d129d1c6d484ae3571f111ec75a75fe684f90
                 }
             }
-
-        })
-
-
-        //filters
-        //handleID 添加id
-
+        });
     </script>
 </body>
 

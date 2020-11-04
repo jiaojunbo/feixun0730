@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../lianxi/css/reset.min.css">
+  <title>选项卡</title>
+  <style>
+    #app {
+      box-sizing: border-box;
+      margin: 50px auto;
+      width: 600px;
+    }
+
+    .tabBox .tab {
+      display: flex;
+      position: relative;
+      top: 1px;
+    }
+
+    .tabBox .tab li {
+      padding-right: 10px;
+      padding: 0 20px;
+      border: 1px solid #aaa;
+      background: #eee;
+      line-height: 35px;
+      cursor: pointer;
+    }
+
+    .tabBox .tab li.active {
+      background: #fff;
+      border-bottom-color: #fff;
+    }
+
+    .tabBox .content {
+      display: none;
+      box-sizing: border-box;
+      padding: 10px;
+      height: 300px;
+      border: 1px solid #aaa;
+    }
+
+    .tabBox .content.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="tabBox">
+      <ul class="tab" @click=handle($event)>
+        <li v-for='(item,index) in TAB_DATA' v-html='item.name' :class='{active:index===curInedx}' :index=index></li>
+        <!-- @click = 'curInedx=index' -->
+      </ul>
+      <div class="content" v-for='(item,index) in TAB_DATA' v-html='item.chidren' :class='{active:index===curInedx}'>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="../../lianxi/vue.js"></script>
+<script>
+  let TAB_DATA = [{
+    id: 1,
+    name: "音乐",
+    chidren: "音乐的内容"
+  }, {
+    id: 2,
+    name: "阅读",
+    chidren: "阅读的内容"
+  }, {
+    id: 3,
+    name: "听歌",
+    chidren: "听歌的内容"
+  }]
+
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      //选项卡数据
+      TAB_DATA,
+      //默认选中索引
+      curInedx: 0
+    },
+    methods: {
+      handle(ev) {
+        let target = ev.target;
+        tarTag = target.tagName;
+        if (tarTag === 'LI') {
+          this.curInedx=parseInt(target.getAttribute('index'));
+        }
+      }
+    }
+  });
+</script>
+
+</html>
