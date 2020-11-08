@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>选项卡</title>
+  <link rel="stylesheet" href="./clint/css/reset.min.css">
+  <link rel="stylesheet" href="./clint/css/banner.css">
+</head>
+
+<body>
+  <div id="app">
+    <banner-plugin :data='bannerData'></banner-plugin>
+    <!-- <div class="container">
+      <div class="wrapper">
+        <div class="slide">
+          <img src="../轮播图/clint/images/banner01.png" alt="">
+        </div>
+        <div class="slide">
+          <img src="../轮播图/clint/images/banner02.png" alt="">
+        </div>
+        <div class="slide">
+          <img src="../轮播图/clint/images/banner03.png" alt="">
+        </div>
+      </div>
+      <div class="pagination">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <a href="javascript:;" class="button-prev"></a>
+      <a href="javascript:;" class="button-next"></a>
+    </div> -->
+  </div>
+
+  <script src="./clint/js/vue.js"></script>
+  <script src="./clint/js/axios.min.js"></script>
+  <script src="./clint/js/axios.defaults.js"></script>
+  <script src="./clint/js/banner-plugin.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        bannerData: [],
+      },
+
+      components: {
+        BannerPlugin
+      },
+      created() {
+        axios.get('/banner.html').then(result=>{
+          if(parseInt(result.code)===0){
+            this.bannerData = result.data;
+          }
+        })
+      }
+
+    })
+  </script>
+</body>
+
+</html>
