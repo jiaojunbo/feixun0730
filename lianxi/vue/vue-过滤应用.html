@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+	<title>珠峰培训 - 微信：18310612838</title>
+	<meta name="keyword">
+	<!-- IMPORT CSS -->
+</head>
+
+<body>
+	<div id="app">
+    <input type="text" @input ="heandInput"  v-model="mytext">
+    <ul>
+      <li v-for="items in dataList">
+        {{items}}
+      </li>
+    </ul>
+  </div>
+
+	<!-- IMPORT JS -->
+	<script src="vue.min.js"></script>
+	<script>
+		let vm = new Vue({
+			el: '#app',
+			data: {
+        mytext:'',
+        dataList:["11122","112222","qqq","www","rrr"],
+        list:["11122","112222","qqq","www","rrr"]
+      },
+      methods: {
+        heandInput(){
+          console.log(this.mytext);
+          let handMan = this.list.filter(item=>item.indexOf(this.mytext)>-1);
+
+          this.dataList= handMan;
+        }
+      },
+		});
+	</script>
+</body>
+
+</html>
