@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="checkbox" v-model='isAllchecked' @click='handelChange()'>
+        <ul>
+            <li v-for='data in dataList'>
+                <input type="checkbox" v-model='shopping' :value='data' @click='handelLiSelect()'>
+                {{data}}
+            </li>
+        </ul>
+        {{shopping}}
+        <p>计算总价：{{handleTotle()}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                shopping: [],
+                isAllchecked: false,
+                dataList: [{
+                    name: "商品1",
+                    price: 10,
+                    number: 1,
+                    id: 1
+                }, {
+                    name: "商品2",
+                    price: 20,
+                    number: 2,
+                    id: 2
+                }, {
+                    name: "商品3",
+                    price: 30,
+                    number: 3,
+                    id: 3
+                }]
+            },
+
+            methods: {
+                handleTotle() {
+                    let sum = 0;
+                    for (let i in this.shopping) {
+                        sum += this.shopping[i].number * this.shopping[i].price;
+                    }
+                    return sum;
+                },
+                handelChange() {
+                    console.log('出发了 ' + this.isAllchecked);
+                    if (this.isAllchecked) {
+                        this.shopping = this.dataList;
+                    } else {
+                        this.shopping = [];
+                    }
+                },
+                handelLiSelect() {
+                    if (this.shopping.length === this.dataList.length) {
+                        this.isAllchecked = true;
+                    } else {
+                        this.isAllchecked = false;
+                    }
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>
+
+
+

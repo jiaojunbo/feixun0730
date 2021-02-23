@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间处理</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="handleClick">wwwww1</button>
+        <button @click="handleClick()">wwwww2</button>
+        <button @click="isShow = !isShow">wwwww3</button>
+        <div v-show="isShow">1111111</div>
+
+        <ul @click="handleUlClick()">
+            <li @click.stop='handleLiClick()'>111</li>
+            <li>222</li>
+            <li>333</li>
+        </ul>
+    </div>
+
+    <a href="www.baidu.com" @click.prevent="handleChangePage()">handleChangePage</a>
+
+    </br>
+
+    <input type="text" @keyup.13 = "handleKeyup($event)">
+
+    <script src="./vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isShow: false
+            },
+            methods: {
+                handleClick() {
+                    this.isShow = !this.isShow;
+                },
+                handleUlClick() {
+                    console.log("ul 22");
+                },
+                handleLiClick(ev) {
+                    // ev.stopPropagation(); //阻止冒泡传播行为
+                    console.log("li 11");
+                },
+                handleChangePage(ev) {
+                    // ev.preventDefault();
+                    console.log("handleChangePage");
+                },
+                handleKeyup(ev){
+                    console.log(ev);
+                    // if (ev.keyCode === 13) {
+                    //     console.log("提交 codelist ");
+                    // }
+                     console.log("执行 codelist ");
+
+                }
+            },
+        })
+
+    </script>
+</body>
+
+</html>

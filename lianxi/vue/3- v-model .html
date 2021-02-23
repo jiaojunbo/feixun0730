@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model</title>
+</head>
+
+<body>
+    <div class="box">
+        <input type="text" v-model="textVm">
+        {{textVm}}
+
+        <input type="checkbox" v-model = "isCheabox">记录
+
+        <br/>
+        <p>你喜欢的运动是：
+            <input type="checkbox" v-model = 'checkgroup' value="游泳">游泳
+            <input type="checkbox" v-model = 'checkgroup' value="爬山">爬山
+            <input type="checkbox" v-model = 'checkgroup' value="跑步">跑步
+{{checkgroup}}
+        </p>
+
+        <p>你最喜欢的语言是：
+            <input type="radio" v-model = 'language' value="javascript">javascript
+            <input type="radio" v-model = 'language' value="Java">Java
+            <input type="radio" v-model = 'language' value="css">css
+{{language}}
+        </p>
+    </div>
+
+    <script src="./vue.min.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '.box',
+            data: {
+                textVm: '',
+                isCheabox: 'true',
+                checkgroup:[],
+                language:''
+
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

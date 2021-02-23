@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="checkbox" v-model="isAllchecked" @change=handelChange()>
+        <ul>
+            <li v-for="data in dataList">
+                <input type="checkbox" v-model='shopping' :value=data @change=handleLiChange()>
+                {{data}}
+                <button @click=handelButtonLed(data)>led</button>
+                {{data.number}}
+                <button @click='data.number++'>all</button>
+            </li>
+
+            {{shopping}}
+            <p>总价格：{{getSum()}}</p>
+        </ul>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                shopping: [],
+                isAllchecked: false,
+                dataList: [
+                    {
+                        name: "商品1",
+                        price: 10,
+                        number: 1,
+                        id: 1
+                    }, {
+                        name: "商品2",
+                        price: 20,
+                        number: 2,
+                        id: 2
+                    }, {
+                        name: "商品3",
+                        price: 30,
+                        number: 3,
+                        id: 3
+                    }
+                ]
+            },
+            methods: {
+                getSum() {
+                    let sum = 0;
+                    for (let i in this.shopping) {
+                        sum += this.shopping[i].number * this.shopping[i].price;
+                    }
+                    return sum;
+                },
+                handelChange() {
+                    if (this.isAllchecked) {
+                        this.shopping = this.dataList
+                    } else {
+                        this.shopping = []
+                    }
+                    console.log('出发了 ' + this.isAllchecked);
+                },
+                handleLiChange() {
+                    console.log("是否全勾选");
+                    console.log(this.shopping.length === this.dataList.length);
+                    if (this.shopping.length === this.dataList.length) {
+                        this.isAllchecked = true
+                    } else {
+                        this.isAllchecked = false
+                    }
+                },
+                handelButtonLed(data) {
+                    let number = data.number--;
+                    if (number === 1) {
+                        data.number = 1
+
+                    }
+                }
+
+            },
+        })
+    </script>
+</body>
+
+</html>
