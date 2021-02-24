@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件</title>
+</head>
+<body>
+    <div id="app">
+        <nuvber></nuvber>
+        <nuvber></nuvber>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+       Vue.component("nuvber",{
+           template:`<div>
+           <button @click = ISaa()>点击</button>
+           nuvber
+           <button>主页</button>
+           </div>
+           `,
+           methods: {
+               ISaa(){
+                   console.log("back")
+               }
+           },
+       })
+       
+       new Vue({
+el:"#app"
+       })
+    </script>
+</body>
+</html>

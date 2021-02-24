@@ -9,15 +9,18 @@
 
 <body>
     <div id="app">
-        <input type="checkbox" v-model='isAllchecked' @click='handelChange()'>
+        <input type="checkbox" v-model="isALL" @change=isAllSelect()>
         <ul>
-            <li v-for='data in dataList'>
-                <input type="checkbox" v-model='shopping' :value='data' @click='handelLiSelect()'>
+            <li v-for="data in dataList">
+                <input type="checkbox" :value=data v-model="shopping"  @change=isAllRadio()>
                 {{data}}
+                <button @click=handleNumber(data)>tep</button>
+                {{data.number}}
+                <button @click=data.number++>all</button>
             </li>
         </ul>
         {{shopping}}
-        <p>计算总价：{{handleTotle()}}</p>
+        <p>已购金额：{{totals()}}</p>
     </div>
     <script src="./vue.js"></script>
     <script>
@@ -25,7 +28,7 @@
             el: "#app",
             data: {
                 shopping: [],
-                isAllchecked: false,
+                isALL: false,
                 dataList: [{
                     name: "商品1",
                     price: 10,
@@ -45,35 +48,38 @@
             },
 
             methods: {
-                handleTotle() {
+                totals() {
                     let sum = 0;
                     for (let i in this.shopping) {
                         sum += this.shopping[i].number * this.shopping[i].price;
                     }
                     return sum;
                 },
-                handelChange() {
-                    console.log('出发了 ' + this.isAllchecked);
-                    if (this.isAllchecked) {
+                isAllSelect() {
+                    if (this.isALL) {
                         this.shopping = this.dataList;
                     } else {
                         this.shopping = [];
                     }
+                    console.log(this.isALL + "选中状态");
                 },
-                handelLiSelect() {
+                isAllRadio() {
+                    console.log(this.shopping.length === this.dataList.length);
                     if (this.shopping.length === this.dataList.length) {
-                        this.isAllchecked = true;
+                        this.isALL = true;
                     } else {
-                        this.isAllchecked = false;
+                        this.isALL = false;
+                    }
+                },
+                handleNumber(data) {
+                    let n = data.number--;
+                    if (n === 1) {
+                        data.number = 1;
                     }
                 }
-
             }
         })
     </script>
 </body>
 
 </html>
-
-
-
