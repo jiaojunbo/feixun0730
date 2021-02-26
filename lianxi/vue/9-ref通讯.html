@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ref通讯</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" ref="myName">
+        <button @click="handleEvent">add</button>
+        <nerder ref="chilName"></nerder>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component("nerder", {
+            template: `<div>
+            shild
+            </div>`,
+            data(){
+                return{
+                    chilNames:"子组件"
+                }
+            },
+            methods:{
+                add(data){
+                    console.log("小乖乖",data);
+                }
+            }
+        })
+
+        let vm = new Vue({
+            el: "#app",
+            data: {},
+            methods: {
+                handleEvent() {
+                    console.log(this.$refs.chilName.add());
+                    this.$refs.chilName.add("nihao")
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

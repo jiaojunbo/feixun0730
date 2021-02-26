@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$emit+$on</title>
+</head>
+
+<body>
+    <div id="app">
+        <wxplatform></wxplatform>
+        <customer></customer>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        let bus = new Vue;
+        Vue.component("wxplatform", {
+            template: `<div>
+            <input type="text" ref="mytext">
+            <button @click = "hendleClick()">提交</button>
+            </div>`,
+            methods: {
+                hendleClick(){
+                    bus.$emit("weixin",this.$refs.mytext.value)
+                }
+            },
+        })
+
+        Vue.component("customer", {
+            template: `<div>
+            我是一名微信客户
+            </div>`,
+            
+                mounted(){
+                    bus.$on("weixin",(data)=>{
+                        console.log("收到推送了",data);
+                    })
+                    console.log("生命周期函数");
+                }
+            
+        })
+
+        new Vue({
+            el: "#app",
+        })
+    </script>
+</body>
+
+</html>

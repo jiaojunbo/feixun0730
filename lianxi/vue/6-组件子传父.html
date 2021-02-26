@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>组件子传父</title>
+    <title>组件父传子</title>
 </head>
 
 <body>
     <div id="box">
         <nuvber myname='新闻页' :isshow = 'true'></nuvber>
         <nuvber myname='标题页' :isshow = 'true'></nuvber>
-        <nuvber myname='花边页' :isshow = 'false'></nuvber>
+        <nuvber :myname='mutext' :isshow = 'false'></nuvber>
     </div>
     <script src="./vue.js"></script>
     <script>
@@ -26,7 +26,10 @@
 
         });
         let box = new Vue({
-            el: '#box'
+            el: '#box',
+            data:{
+                mutext:"父组件"
+            }
         })
     </script>
 </body>

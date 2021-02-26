@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件子传父</title>
+</head>
+
+<body>
+    <div id="app">
+        父组件
+        <child @myevent="handleEvent($event)"></child>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component("child",{
+            template:`<div>
+            child组件
+            <button @click = "mytext()">click</button>
+            </div>`,
+            data() {
+                return {
+                    handeEvent:"子组件状态"
+                }
+            },
+            methods: {
+                mytext(){
+                    this.$emit("myevent",this.handeEvent)
+                }
+            },
+        })
+        new Vue({
+            el:"#app",
+            data:{},
+            methods: {
+                handleEvent(ev){
+                    console.log("父组件状态",ev)
+                }
+            },
+        })
+    </script>
+
+</body>
+
+</html>

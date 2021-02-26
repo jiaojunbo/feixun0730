@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>子传父案例</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <button @click=isShow=!isShow>click</button> -->
+        <navber @myevent='handleEvent'></navber>
+        <child v-show="isShow"></child>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component("navber", {
+            template: `<div>
+                    nunnnnn
+            
+            <button @click ="navEvet()">
+            button
+            </button>
+            </div>`,
+            methods: {
+                navEvet() {
+                    this.$emit("myevent")
+                }
+            }
+        })
+        Vue.component("child", {
+            template: `<div style="background:red;">
+            <ul>
+                <li>11111</li>
+                <li>11111</li>
+                <li>11111</li>
+            </ul>
+            </div>`
+        })
+
+        new Vue({
+            el: "#app",
+            data: {
+                isShow: false,
+            },
+            methods: {
+                handleEvent() {
+                    this.isShow = !this.isShow;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
