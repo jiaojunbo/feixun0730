@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件</title>
+
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        overflow-y: hidden;
+    }
+
+    footer ul {
+        display: flex;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+    }
+
+    footer ul li {
+        flex: 1;
+        text-align: center;
+        list-style: none;
+        height: 50px;
+        line-height: 50px;
+        background: #cccc;
+    }
+
+    .kerwinbounce-enter-active {
+        animation: bounce-in .5s;
+    }
+
+    .kerwinbounce-leave-active {
+        animation: bounce-in .5s reverse;
+    }
+
+    @keyframes bounce-in {
+        0% {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+</style>
+
+
+<body>
+    <div id="app">
+        <keep-alive>
+            <transition name="kerwinbounce" mode = "out-in">
+                <component :is="show"></component>
+            </transition>
+        </keep-alive>
+        <footer>
+            <ul>
+                <li @click="show = 'homes'"><a>首页</a></li>
+                <li @click="show = 'lists'"><a>列表页</a></li>
+                <li @click="show = 'spans'"><a>详情页</a></li>
+            </ul>
+        </footer>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                show: 'homes'
+            },
+            components: {
+                "homes": {
+                    template: `<div>home <input value = ""></div>`
+                },
+                "lists": {
+                    template: `<div>list</div>`
+                },
+                "spans": {
+                    template: `<div>span</div>`
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

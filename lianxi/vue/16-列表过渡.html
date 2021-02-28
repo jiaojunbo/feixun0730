@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表过渡样式</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="myText">
+        <button @click="handleAll">添加</button>
+
+        <ul>
+            <li v-for="(data,index) in dataItem">{{data}}--{{index}}
+                <button @click="handleDelete(index)">刪除</button></li>
+        </ul>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                dataItem: [111],
+                myText: '111'
+            },
+            methods: {
+                handleAll() {
+                    this.dataItem += this.myText;
+                    console.log(this.dataItem, this.myText);
+                },
+                handleDelete(index) {
+                    this.dataItem.filter((item, indexs) => {
+                        indes === index ? this.dataItem[index] = "delete" : null;
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

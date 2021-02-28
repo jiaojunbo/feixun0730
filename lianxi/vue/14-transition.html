@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transition</title>
+    <style>
+        .kerwinfade-enter-active,
+        .kerwinfade-leave-active {
+            transition: all 1s;
+        }
+
+        .kerwinfade-enter,
+        .kerwinfade-leave-to {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+
+
+        .kerwinbounce-enter-active{
+            animation: bounce-in .5s ;
+        }
+        .kerwinbounce-leave-active{
+            animation: bounce-in .5s reverse;
+        }
+        @keyframes bounce-in{
+            0%{
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            100%{
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <button @click="isShow=!isShow">点击</button>
+        
+        <transition name = kerwinfade  mode ="in-out">
+            <p v-if="isShow" key ="1">1111111111111</p>
+            <p v-else key ="2">22222222</p>
+        </transition>
+
+        <transition name = kerwinbounce>
+            <div v-show="isShow">333333333333</div>
+        </transition>
+        <!-- <swpri v-show = "isShow"></swpri> -->
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+
+        Vue.component("child", {
+            template: `
+    <div>
+        <slot></slot>
+    </div>`
+        })
+        Vue.component("swpri", {
+            template: `<div>
+        <ul>
+        <li>111</li>
+        <li>111</li>
+        <li>111</li>
+    </ul>
+        </div>`
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                isShow: false,
+            }
+        })
+    </script>
+</body>
+
+</html>
