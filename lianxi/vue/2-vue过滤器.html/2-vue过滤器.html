@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="data in dataItem" :key="data.id">
+                <h3>{{data.nm}}</h3>
+                <!-- <img :src="handleImg(data.img)" alt="你好"> -->
+                <img :src="data.img | handleImg" alt="">
+            </li>
+        </ul>
+    </div>
+
+    <script src="../vue.js"></script>
+    <script src="../../axios.min.js"></script>
+    <script>
+
+Vue.f("handleImg",function(path){
+    return path.replace("w.h","128.180")
+})
+
+        let app = new Vue({
+            el: "#app",
+            data: {
+                dataItem:[]
+            },
+            mounted() {
+                axios.get('index.json').then(res => {
+                    console.log(res.data.showData.movies)
+                    this.dataItem = res.data.showData.movies;
+                })
+            },
+            methods: {
+                handleImg(path){
+                   return path.replace("w.h","128.180")
+                }
+            },
+        })
+       
+        //https://p0.meituan.net/170.230/movie/48774506dc0e68805bc25d2cd087d1024316392.jpg
+        //"http://p0.meituan.net/w.h/movie/48774506dc0e68805bc25d2cd087d1024316392.jpg"
+        //http://p0.meituan.net/128*180/movie/48774506dc0e68805bc25d2cd087d1024316392.jpg
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指令</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-hello>11111</div>
+        <div v-hello="'yellow'">222222</div>
+        <div v-hello="myColor">3333333</div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.directive("hello", {
+            inserted(el, bind) {
+                //创建阶段
+                el.style.background = "red"
+                el.style.background = bind.value
+            },
+            update(el, bind) {
+                //更新阶段
+                el.style.background = bind.value
+            },
+        })
+        let app = new Vue({
+            el: '#app',
+            data: {
+                myColor: "red"
+            }
+        })
+    </script>
+</body>
+
+</html>

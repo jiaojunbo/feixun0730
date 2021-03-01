@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>swiper动态</title>
+    <style>
+        .wriper-container {
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for="data in dataItem">
+                    {{data}}
+                </div>
+            </div>
+
+            <div class="wriper-pagination">
+
+            </div>
+        </div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                dataItem: []
+            },
+            mounted() {
+                setTimeout(()=>{
+                    this.dataItem = ['11111','222222','333333333']
+                },2000)
+            },
+
+        })
+    </script>
+</body>
+
+</html>
