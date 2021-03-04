@@ -12,7 +12,7 @@
 
 <body>
     <div id="app">
-        <input type="text" v-model="myText">
+        <input type="text" v-model="myText">{{myText}}
         <button @click="handleAll">添加</button>
 
         <ul>
@@ -21,23 +21,21 @@
         </ul>
     </div>
 
-    <script src="./vue.js"></script>
+    <script src="../vue.js"></script>
     <script>
         new Vue({
             el: "#app",
             data: {
-                dataItem: [111],
-                myText: '111'
+                dataItem: [111, 222],
+                myText: []
             },
             methods: {
                 handleAll() {
-                    this.dataItem += this.myText;
-                    console.log(this.dataItem, this.myText);
+                    console.log( this.myText);
+                    this.dataItem.push(this.myText)
                 },
                 handleDelete(index) {
-                    this.dataItem.filter((item, indexs) => {
-                        indes === index ? this.dataItem[index] = "delete" : null;
-                    })
+                    this.dataItem.splice(index, 1);
                 }
             },
         })
